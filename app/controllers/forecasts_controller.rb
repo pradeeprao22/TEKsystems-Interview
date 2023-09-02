@@ -1,6 +1,5 @@
 class ForecastsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_forecast, only: [:show]
   
     def index
       @forecasts = Forecast.all
@@ -21,10 +20,6 @@ class ForecastsController < ApplicationController
     end
   
     private
-  
-    def set_forecast
-      @forecast_data = Forecast.find(params[:id])
-    end
   
     def retrieve_forecast(address)
       Rails.cache.fetch("forecast_#{address}", expires_in: 30.minutes) do
