@@ -71,5 +71,9 @@ group :test do
   gem "webdrivers"
 end
 
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'geocoder'
 gem 'httparty'
+gem 'devise', '~> 4.9', '>= 4.9.2'
+gem 'bcrypt', '~> 3.1', require: 'bcrypt'
+gem 'byebug'
