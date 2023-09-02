@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather Forecast</title>
+</head>
+<body>
+  <h1>Weather Forecast</h1>
+  <p>Enter an address to get the weather forecast:</p>
+
+  <%= form_tag(forecasts_path, method: "post") do %>
+    <label for="address">Address:</label>
+    <%= text_field_tag("address", nil, placeholder: "Enter an address") %>
+    <%= submit_tag("Get Forecast") %>
+  <% end %>
+
+  <% if @cached %>
+    <p class="cached-indicator">This forecast was pulled from the cache.</p>
+  <% end %>
+
+  <!-- Display inserted records -->
+  <h2>Weather Forecast Records</h2>
+  <% if @forecasts.any? %>
+    <ul>
+      <% @forecasts.each do |forecast| %>
+        <li>
+          <strong>Address:</strong> <%= forecast.address %><br>
+          <strong>Current Temperature:</strong> <%= forecast.current_temperature %> &deg;C<br>
+          <strong>High Temperature:</strong> <%= forecast.high_temperature %> &deg;C<br>
+          <strong>Low Temperature:</strong> <%= forecast.low_temperature %> &deg;C<br>
+          <!-- Additional forecast data can be displayed here as needed -->
+          <% if forecast.extended_forecast.present? %>
+            <h3>Extended Forecast:</h3>
+            <ul>
+              <% JSON.parse(forecast.extended_forecast)['list'].each do |extended_forecast| %>
+                <li>
+                  <strong>Date/Time:</strong> <%= Time.at(extended_forecast['dt']).strftime('%Y-%m-%d %H:%M:%S') %><br>
+                  <strong>Temperature:</strong> <%= extended_forecast['main']['temp'] %> &deg;C<br>
+                  <!-- Add more details from the extended forecast data as needed -->
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No forecast records available.</p>
+  <% end %>
+</body>
+</html>

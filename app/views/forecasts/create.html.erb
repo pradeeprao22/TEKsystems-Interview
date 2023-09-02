@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather Forecast</title>
+</head>
+<body>
+  <h1>Weather Forecast for <%= @address %></h1>
+
+  <% if @cached %>
+    <p class="cached-indicator">This forecast was pulled from the cache.</p>
+  <% end %>
+
+  <% if @forecast_data %>
+    <p><strong>Current Temperature:</strong> <%= @forecast_data.current_temperature %> &deg;C</p>
+    <p><strong>High Temperature:</strong> <%= @forecast_data.high_temperature %> &deg;C</p>
+    <p><strong>Low Temperature:</strong> <%= @forecast_data.low_temperature %> &deg;C</p>
+    <!-- Add additional forecast data here as needed -->
+
+    <!-- Example: Extended forecast (if you fetch it separately) -->
+    <% if @forecast_data.extended_forecast.present? %>
+      <h2>Extended Forecast:</h2>
+      <p><%= @forecast_data.extended_forecast %></p>
+    <% end %>
+  <% else %>
+    <p>Weather data not available for this address.</p>
+  <% end %>
+</body>
+</html>
