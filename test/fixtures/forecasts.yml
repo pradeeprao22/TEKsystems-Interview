@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  address: MyString
+  current_temperature: 1.5
+  high_temperature: 1.5
+  low_temperature: 1.5
+  extended_forecast: MyText
+  cached_at: 2023-09-02 13:32:54
+
+two:
+  address: MyString
+  current_temperature: 1.5
+  high_temperature: 1.5
+  low_temperature: 1.5
+  extended_forecast: MyText
+  cached_at: 2023-09-02 13:32:54
